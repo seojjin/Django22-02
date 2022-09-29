@@ -20,4 +20,4 @@ class PostList(ListView):
 class PostDetail(DetailView):
     model = Post
     # 템플릿 모델명_detail.html : post_detail.html
-    # 파라미터 모델명 : post
+    # 파라미터 모델명 :post
