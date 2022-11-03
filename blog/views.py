@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Post, Category
+from .models import Post, Category, Tag
 from django.views.generic import ListView, DetailView
 
 #def index(request):
@@ -51,6 +51,20 @@ def category_page(request, slug): #slug가지고 와서 변수에 저장 그리�
          'categories':Category.objects.all(),
          'no_category_post_count': Post.objects.filter(category=None).count
          } #템플릿이 사용하는 변수(이걸로 표시 하겠다)
+    )
+
+def tag_page(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    post_list = tag.post_set.all() #태그의 값을 가지고 있는 부분집합들을 가지고 온다
+    return render(
+        request,
+        'blog/post_list.html',  # 템플릿을 이걸로 계속 쓰겠다
+        {
+         'tag': tag,
+         'post_list': post_list,
+         'categories': Category.objects.all(),
+         'no_category_post_count': Post.objects.filter(category=None).count
+         }  # 템플릿이 사용하는 변수(이걸로 표시 하겠다)
     )
 
 

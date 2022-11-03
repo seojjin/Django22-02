@@ -6,6 +6,11 @@
                     {% if category %}
                         - <span class="badge badge-secondary">{{ category }}</span>
                     {% endif %}
+                    {% if tag %}
+                        - <i class="fas fa-tag"></i> <span class="badge badge-secondary">
+                        {{ tag }} ({{tag.post_set.count}}) <!--post_set -> 모두 가져와-->
+                    </span>
+                    {% endif %}
                 </h2>
                 <!-- Featured blog post-->
                 {% if post_list.exists %} <!--test 를 위해서 써야함-->
@@ -27,6 +32,15 @@
                         <h5 class="text-muted">{{p.hook_text}}</h5>
                         {% endif %}
                         <p class="card-text">{{p.content | truncatechars:100}}</p> <!--미리보기 100자-->
+                        {% if p.tags.exists %}
+                            <i class="fas fa-tag"></i>
+                            {% for t in p.tags.iterator %}
+                                <span class="badge badge-pill badge-light">
+                                    <a href="{{t.get_absolute_url}}">{{t}}</a>
+                                </span>
+                            {% endfor %}
+                            <br><br>
+                        {% endif %}
                         <a class="btn btn-primary" href="{{p.get_absolute_url}}">Read more →</a>
                     </div>
                     <div class="card-footer">

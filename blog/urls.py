@@ -6,7 +6,8 @@ urlpatterns = [
     #path('<int:pk>/', views.single_post_page), #FBV 로 만들려면 해야함
     path('', views.PostList.as_view()),
     path('<int:pk>/', views.PostDetail.as_view()), # 디테일 들어갔을때 뒤에 pk 붙이면서 포스트 디테일 페이지
-    path('category/<str:slug>/', views.category_page) #그리고 views 들어가서 카테고리 페이지 만들기
+    path('category/<str:slug>/', views.category_page), #그리고 views 들어가서 카테고리 페이지 만들기
+    path('tag/<str:slug>/', views.tag_page),#ip주소/blog/tag/slug/
  ]
 
 #미디어 관리는 settings 들어가서 저렇게 그리고 헤드 이미지 모델 만들기

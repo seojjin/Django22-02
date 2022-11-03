@@ -2,6 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f'/blog/tag/{self.slug}'
+
+
 class Category(models.Model): #첫번째 카테고리 모델 만들기
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
@@ -42,6 +53,8 @@ class Post(models.Model):
 
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
     #카테고리 필드 추가, 미분류 포스트를 위한 null=true, 카테고리 삭제시 포스트 삭제는 no, 빈칸 지정 ok
+
+    tags = models.ManyToManyField(Tag, blank=True)  #null과 on~ 쓸필요 없음음
 
     def __str__(self): # admin post페이지에서 보여주는 것
         return f'[{self.pk}]{self.title}::{self.author} : {self.created_at}'
