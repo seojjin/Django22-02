@@ -1,27 +1,37 @@
 {% extends 'blog/base.html' %}
 
 {% block main_area %}
-                <h2>Blog</h2>
+<!--카테고리로 들어왔다면 카테고리 이름 표시해주기-->
+                <h2>Blog
+                    {% if category %}
+                        - <span class="badge badge-secondary">{{ category }}</span>
+                    {% endif %}
+                </h2>
                 <!-- Featured blog post-->
-                {% if post_list.exists %}
+                {% if post_list.exists %} <!--test 를 위해서 써야함-->
                 {% for p in post_list %}
-                <div class="card mb-4">
+                <div class="card mb-4" id="post-{{p.pk}}">
                     {% if p.head_image %}
                     <img class="card-img-top" src="{{p.head_image.url}}" alt="{{p}}의 head_image" />
                     {% else %}
                     <img class="card-img-top" src="https://picsum.photos/seed/{{p.pk}}/800/200" alt="random_image"/>
                     {% endif %}
                     <div class="card-body">
+                        {% if p.category %}
+                            <span class="badge badge-secondary float-right"><a href="{{p.category.get_absolute_url}}">{{p.category}}</a></span>
+                        {% else %}
+                            <span class="badge badge-secondary float-right"><a href="/blog/category/no_category/">미분류</a></span>
+                        {% endif %}
                         <h2 class="card-title">{{p.title | upper}}</h2>
                         {% if p.hook_text %}
                         <h5 class="text-muted">{{p.hook_text}}</h5>
                         {% endif %}
-                        <p class="card-text">{{p.content | truncatechars:100}}</p>
+                        <p class="card-text">{{p.content | truncatechars:100}}</p> <!--미리보기 100자-->
                         <a class="btn btn-primary" href="{{p.get_absolute_url}}">Read more →</a>
                     </div>
                     <div class="card-footer">
                          <div class="small text-muted">{{p.created_at | date:"Y-m-d h:m:s"}}</div>
-                        <a href="#">{{p.author | upper}}</a>
+                         <a href="#">{{p.author | upper}}</a>
                     </div>
                 </div>
                 {% endfor %}

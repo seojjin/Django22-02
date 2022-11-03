@@ -1,20 +1,6 @@
-"""myDjangoPrj URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
+# 아래 두개가 파일 때문에 임포트
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,5 +10,5 @@ urlpatterns = [
     path('',include('single_pages.urls')) #ip주소
 ]
 
-
+# 파일을 위한 url지정 그리고 본문에 어떤 파일인지에 따라서 로고 변환
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
