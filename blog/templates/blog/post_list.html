@@ -1,6 +1,15 @@
 {% extends 'blog/base.html' %}
 
 {% block main_area %}
+            {% if user.is_authenticated %}
+                {% if user.is_superuser or user.is_staff %}
+                    <a href="/blog/create_post/" role="button"
+                       class="btn btn-info btn-sm float-right">
+                        <i class="fas fa-pen"></i>
+                        New Post
+                    </a>
+                {% endif %}
+            {% endif %}
 <!--카테고리로 들어왔다면 카테고리 이름 표시해주기-->
                 <h2>Blog
                     {% if category %}
