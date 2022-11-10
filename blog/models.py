@@ -54,7 +54,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
     #카테고리 필드 추가, 미분류 포스트를 위한 null=true, 카테고리 삭제시 포스트 삭제는 no, 빈칸 지정 ok
 
-    tags = models.ManyToManyField(Tag, blank=True)  #null과 on~ 쓸필요 없음음
+    tags = models.ManyToManyField(Tag, null=True, blank=True)  #null과 on~ 쓸필요 없음음
 
     def __str__(self): # admin post페이지에서 보여주는 것
         return f'[{self.pk}]{self.title}::{self.author} : {self.created_at}'

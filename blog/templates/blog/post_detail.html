@@ -23,7 +23,7 @@
                                 <a class="badge bg-secondary text-decoration-none link-light" href="/blog/category/no_category/">미분류</a>
                             {% endif %}
                         </header>
-                        {% if user.is_authenticated and user == post.author %a}
+                        {% if user.is_authenticated and user == post.author %}
                         <a href="/blog/update_post/{{post.pk}}" role="button"
                             class="btn btn-info btn-sm float-right">
                             <i class="fas fa-pen"></i>
@@ -43,11 +43,10 @@
                         <section class="mb-5">
                             <p class="fs-5 mb-4">{{post.content}}</p>
                             {% if post.tags.exists %}
-                            <i class="fas fa-tag"></i>
-                            {% for t in post.tags.iterator %}
-                                <span class="badge badge-pill badge-light"><a href="{{t.get_absolute_url}}">{{t}}</a></span>
-                            {% endfor %}
-                            <br><br>
+                                <i class="fas fa-tag"></i>
+                                {% for t in post.tags.iterator %}
+                                    <span class="badge badge-pill badge-light"><a href="{{t.get_absolute_url}}">{{t}}</a></span>
+                                {% endfor %}
                             {% endif %}
 
                             {% if post.file_upload %}
