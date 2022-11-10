@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.PostList.as_view()),
     path('<int:pk>/', views.PostDetail.as_view()), # 디테일 들어갔을때 뒤에 pk 붙이면서 포스트 디테일 페이지
     path('create_post/', views.PostCreate.as_view()),
+    path('update_post/<int:pk>/', views.PostUpdate.as_view()),
     path('category/<str:slug>/', views.category_page), #그리고 views 들어가서 카테고리 페이지 만들기
     path('tag/<str:slug>/', views.tag_page),#ip주소/blog/tag/slug/
  ]

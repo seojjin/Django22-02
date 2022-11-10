@@ -1,12 +1,11 @@
 {% extends 'blog/base.html' %}
 
 {% block head_title %}
-    Create Post - Blog
+    Update Post - Blog
 {% endblock %}
 
 {% block main_area %}
-
-    <h1>Create New Post</h1>
+    <h1>Update Post</h1>
     <hr>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -14,10 +13,7 @@
             {{ form }}
         </table>
         <button type="submit" class="btn btn-primary float_left">Submit</button>
-
     </form>
-
-
 <hr>
 
 {% endblock %}

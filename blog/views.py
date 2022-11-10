@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from .models import Post, Category, Tag
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
 
 #def index(request):
 #    posts1 = Post.objects.all().order_by('-pk')
@@ -10,6 +11,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 #def single_post_page(request, pk):
 #    post2 = Post.objects.get(pk=pk)
 #    return render(request, 'blog/single_post_page.html', {'post': post2})
+
+class PostUpdate(LoginRequiredMixin, UpdateView):
+    model = Post
+    fields = ['title', 'hook_text', 'content', 'head_image', 'file_upload', 'category', 'tags']
+
+    template_name = 'blog/post_update_form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(PostUpdate, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_post_count'] = Post.objects.filter(category=None).count
+        return context
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
