@@ -69,3 +69,17 @@ class Post(models.Model):
     # 파일 이름 중 가장 마지막 확장자만 가져오기
     def get_file_ext(self):
         return self.get_file_name().split('.')[-1]  #a.txt ab.doc c.xlsx ... a.b.c.txt?? -> 배열 가장 마지막 원소 = -1
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.author} : {self.content}'
+
+    # 댓글있는 부분 찾아서 이동
+    def get_absolute_url(self):
+        return f'{self.post.get_absolute_url()}#comment-{self.pk}' #admin에서 viewonsite로 확인하기 위해 url(포스트 상세페이지) return하기

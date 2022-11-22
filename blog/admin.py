@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag, Comment
 
 # Register your models here. 모델 만든거 admin에 넣어야함
 admin.site.register(Post)
@@ -16,3 +16,4 @@ class TagAdmin(admin.ModelAdmin):
 
 admin.site.register(Tag, TagAdmin)
 
+admin.site.register(Comment)
