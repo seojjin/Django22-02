@@ -6,6 +6,7 @@ urlpatterns = [
     #path('<int:pk>/', views.single_post_page), #FBV 로 만들려면 해야함
     path('', views.PostList.as_view()),
     path('<int:pk>/', views.PostDetail.as_view()), # 디테일 들어갔을때 뒤에 pk 붙이면서 포스트 디테일 페이지
+    path('update_comment/<int:pk>/', views.CommentUpdate.as_view()),
     path('<int:pk>/new_comment/', views.new_comment),
     path('create_post/', views.PostCreate.as_view()),
     path('update_post/<int:pk>/', views.PostUpdate.as_view()),
