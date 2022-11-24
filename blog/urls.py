@@ -12,6 +12,7 @@ urlpatterns = [
     path('update_post/<int:pk>/', views.PostUpdate.as_view()),
     path('category/<str:slug>/', views.category_page), #그리고 views 들어가서 카테고리 페이지 만들기
     path('tag/<str:slug>/', views.tag_page),#ip주소/blog/tag/slug/
+    path('search/<str:q>/', views.PostSearch.as_view()),
  ]
 
 #미디어 관리는 settings 들어가서 저렇게 그리고 헤드 이미지 모델 만들기

@@ -20,6 +20,11 @@
                         {{ tag }} ({{tag.post_set.count}}) <!--post_set -> 모두 가져와-->
                     </span>
                     {% endif %}
+                    {% if search_info %}
+                    <span class="badge badge-secondary">
+                        {{search_info}}
+                    </span>
+                    {% endif %}
                 </h2>
                 <!-- Featured blog post-->
                 {% if post_list.exists %} <!--test 를 위해서 써야함-->
