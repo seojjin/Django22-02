@@ -99,6 +99,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class PostList(ListView):
     model = Post
     ordering = '-pk'
+    paginate_by = 5
 
     # 카테고리 변수 정의하고 함수 쓰기 화면에 보여주기 위한, 숫자까지
     def get_context_data(self, *, object_list=None, **kwargs):
