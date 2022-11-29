@@ -83,3 +83,9 @@ class Comment(models.Model):
     # 댓글있는 부분 찾아서 이동
     def get_absolute_url(self):
         return f'{self.post.get_absolute_url()}#comment-{self.pk}' #admin에서 viewonsite로 확인하기 위해 url(포스트 상세페이지) return하기
+
+    def get_avatar_url(self):
+        if self.author.socialaccount_set.exists():
+            return self.author.socialaccount_set.first().get_avatar_url()
+        else:
+            return 'https://dummyimage.com/50x50/ced4da/6c757d.jpg'
