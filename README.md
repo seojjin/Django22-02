@@ -1,2 +1,2 @@
 # Django22-02
-InternetPrograming02-2022
+인터넷프로그래밍 과목 실습 코드입니다.
